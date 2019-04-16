@@ -3,51 +3,49 @@ Music Data Anaylsis
 
 Execution Steps : 
 
-Copy the project and uzip it Move the entire directory structure to /home/acadgild
+1) Copy the project and uzip it Move the entire directory structure to /home/acadgild
 
-Run MySQL sudo service mysqld start
+2) Run MySQL sudo service mysqld start
 
-Make sure all the scripts in /home/acadgild/project/scripts have 774 permissions Run below command:
+3) Make sure all the scripts in /home/acadgild/project/scripts have 774 permissions Run below command:
 
-chmod 774 /home/acadgild/project/scripts/*
+4) chmod 774 /home/acadgild/project/scripts/*
 
-Run The Below Scripts:
+5) Run The Below Scripts:
 
-generate_web_data.py -- Generates some random data coming from web application
+  a) generate_web_data.py -- Generates some random data coming from web application
 
-python /home/acadgild/project/scripts/generate_web_data.py
+--> python /home/acadgild/project/scripts/generate_web_data.py
 
-generate_mob_data.py -- Generates some random data coming from mobile application
+  b) generate_mob_data.py -- Generates some random data coming from mobile application
 
-python /home/acadgild/project/scripts/generate_mob_data.py
+--> python /home/acadgild/project/scripts/generate_mob_data.py
 
-sudo service mysqld start
+  c) start-daemons.sh -- Launches all necessary daemons
 
-start-daemons.sh -- Launches all necessary daemons
+--> sh /home/acadgild/project/scripts/start-daemons.sh
 
-sh /home/acadgild/project/scripts/start-daemons.sh
+  d) create_hive_hbase_lookup.sh -- Creates hive table over HBase
 
-create_hive_hbase_lookup.sh -- Creates hive table over HBase
+--> sh /home/acadgild/project/scripts/create_hive_hbase_lookup.sh
 
-sh /home/acadgild/project/scripts/create_hive_hbase_lookup.sh
+  e) populate-lookup.sh -- Populates lookup tables
 
-populate-lookup.sh -- Populates lookup tables
+--> sh /home/acadgild/project/scripts/populate-lookup.sh
 
-sh /home/acadgild/project/scripts/populate-lookup.sh
+  f) dataformatting.sh -- Performs data formatting
 
-dataformatting.sh -- Performs data formatting
+--> sh /home/acadgild/project/scripts/dataformatting.sh
 
-sh /home/acadgild/project/scripts/dataformatting.sh
+  g) data_enrichment.sh -- Performs data enrichment and cleaning
 
-data_enrichment.sh -- Performs data enrichment and cleaning
+--> sh /home/acadgild/project/scripts/data_enrichment.sh
 
-sh /home/acadgild/project/scripts/data_enrichment.sh
+  h) data_analysis.sh -- Performs data analysis
 
-data_analysis.sh -- Performs data analysis
+--> sh /home/acadgild/project/scripts/data_analysis.sh
 
-sh /home/acadgild/project/scripts/data_analysis.sh
-
-Scheduling:
+6) Scheduling:
 We'll be using crontab for job scheduling. Job has to run every 3 hours
 
 sudo crontab -e
